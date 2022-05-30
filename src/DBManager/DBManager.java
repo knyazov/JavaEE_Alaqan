@@ -12,39 +12,40 @@ public class DBManager {
 
     private static Connection connection;
 
-   static {
-       try{
-           Class.forName("com.mysql.cj.jdbc.Driver");
-           connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_db?useUnicode=true&serverTimezone=UTC", "root", "");
-       }catch (Exception e){
-           e.printStackTrace();
-       }
-   }
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee_db?useUnicode=true&serverTimezone=UTC", "root", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-   public User getUser(String email){
-       User user = null;
+    public static User getUser(String email) {
+        User user = null;
 
-       try{
-           PreparedStatement statement = connection.prepareStatement("" +
-                   "SELECT * FROM  users" +
-                   "WHERE email = ?" +
-                   "");
-           statement.setString(1, user.getEmail());
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "SELECT * FROM  users " +
+                    "WHERE email = ?" +
+                    "");
+            statement.setString(1, email);
 
-           ResultSet resultSet = statement.executeQuery();
-           if (resultSet.next()){
-               user = new User();
-               user.setEmail(resultSet.getString("email"));
-               user.setId(resultSet.getLong("id"));
-               user.setName(resultSet.getString("name"));
-               user.setSurname(resultSet.getString("surname"));
-               user.setPassword(resultSet.getString("password"));
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = new User(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("surname"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password")
+                );
 
-           }
-       }catch(Exception e){
-           e.printStackTrace();
-       }
-       return user;
-   }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 
 }

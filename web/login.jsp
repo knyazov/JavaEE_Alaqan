@@ -9,7 +9,29 @@
 <div class="container">
     <div class="row mt-3">
         <div class="col-6 mx-auto">
-            <form action="/login" method="post">
+
+            <%
+                String passwordError = request.getParameter("passwordError");
+                if (passwordError != null) {
+            %>
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Password is ERROR!</h4>
+            </div>
+            <%
+                }
+            %>
+            <%
+                String emailError = request.getParameter("emailError");
+                if (emailError != null) {
+            %>
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Email is ERROR!</h4>
+            </div>
+            <%
+                }
+            %>
+
+            <form action="/auth" method="post">
                 <div class="row mt-3">
                     <div class="col-12">
                         <label>EMAIL</label>
@@ -27,14 +49,14 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <input type="password" class="form-control" placeholder="password" required name="email">
+                        <input type="password" class="form-control" placeholder="password" required name="password">
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-12">
-                    <button class="btn btn-primary">
-                        LOGIN
-                    </button>
+                        <button class="btn btn-primary">
+                            LOGIN
+                        </button>
                     </div>
                 </div>
             </form>
