@@ -13,10 +13,11 @@
                     if (online) {
                 %>
                 <li class="nav-item active"><a class="nav-link"
-                                               href="/profile"><%=currentUser.getName() + currentUser.getSurname()%>
+                                               href="/profile"><%=currentUser.getName() +" "+ currentUser.getSurname()%>
                     </a></li>
-                <li class="nav-item"><a class="nav-link" href="#"> About </a></li>
-                <li class="nav-item"><a class="nav-link" href="#"> ONLINE </a></li>
+                <li class="nav-item"><a class="nav-link" href="/profile"> Profile </a></li>
+                <li class="nav-item"><a class="nav-link" href="/addFood"> ADD FOOD </a></li>
+                <li class="nav-item"><a class="nav-link" href="/logOut"> Log out </a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"> Hover me </a>
                     <ul class="dropdown-menu">
@@ -30,8 +31,8 @@
                 %>
 
                 <li class="nav-item active"><a class="nav-link" href="#">Home </a></li>
-                <li class="nav-item"><a class="nav-link" href="#"> About </a></li>
-                <li class="nav-item"><a class="nav-link" href="#"> OFFLINE </a></li>
+                <li class="nav-item"><a class="nav-link" href="#"> Menu </a></li>
+                <li class="nav-item"><a class="nav-link" href="/login"> Log In </a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"> Hover me </a>
                     <ul class="dropdown-menu">
