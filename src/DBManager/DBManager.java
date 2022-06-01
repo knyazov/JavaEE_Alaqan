@@ -1,5 +1,6 @@
 package DBManager;
 
+import Entities.Foods;
 import Entities.User;
 
 import java.sql.Connection;
@@ -48,4 +49,21 @@ public class DBManager {
         return user;
     }
 
+    public static void addFood(Foods food) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "INSERT INTO foods (user_id, name, photo, description, price, paste_date)" +
+                    "VALUES (?, ?, ?, ?, ?, NOW())");
+            statement.setLong(1, food.getUser().getId());
+            statement.setString(2, food.getName());
+            statement.setString(3, food.getPhoto());
+            statement.setString(4, food.getDescription());
+            statement.setLong(5, food.getPrice());
+
+            statement.executeQuery();
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

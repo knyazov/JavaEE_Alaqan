@@ -22,7 +22,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="name">
                     </div>
                 </div>
                 <div class="row">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="photo">
                     </div>
                 </div>
                 <div class="row">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" name="price">
                     </div>
                 </div>
                 <button class="btn btn-success">ADD FOOD</button>
