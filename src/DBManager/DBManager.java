@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class DBManager {
@@ -60,10 +61,41 @@ public class DBManager {
             statement.setString(4, food.getDescription());
             statement.setLong(5, food.getPrice());
 
-            statement.executeQuery();
+            statement.executeUpdate();
             statement.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<Foods> getAllFoods() {
+        ArrayList<Foods> foods = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "SELECT f.id, f.user_id, f.name as foodName, f.photo, f.description, f.paste_date, f.price, u.name, u.surname, u.email" +
+                    "FROM foods f " +
+                    "INNER JOIN users u on u.id = f.user_id");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Foods food = new Foods();
+                food.setName(resultSet.getString("foodName"));
+                food.setPhoto(resultSet.getString("photo"));
+                food.setDescription(resultSet.getString("description"));
+                food.setPrice(Long.parseLong(resultSet.getString("price")));
+                food.setPaste_date(resultSet.getTimestamp("paste_date"));
+
+                User user = new User();
+                user.setId(Long.parseLong(resultSet.getString("user_id")));
+                user.setName(resultSet.getString("name"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setEmail(resultSet.getString("email"));
+
+                food.setUser(user);
+            }
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return foods;
     }
 }

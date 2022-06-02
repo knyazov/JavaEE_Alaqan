@@ -15,7 +15,8 @@
                 <li class="nav-item active"><a class="nav-link"
                                                href="/profile"><%=currentUser.getName() +" "+ currentUser.getSurname()%>
                     </a></li>
-                <li class="nav-item"><a class="nav-link" href="/profile"> Profile </a></li>
+                <li class="nav-item"><a class="nav-link" href="/home"> HOME </a></li>
+                <li class="nav-item"><a class="nav-link" href="/profile"> PROFILE </a></li>
                 <li class="nav-item"><a class="nav-link" href="/addFood"> ADD FOOD </a></li>
                 <li class="nav-item"><a class="nav-link" href="/logOut"> Log out </a></li>
                 <li class="nav-item dropdown">
@@ -30,7 +31,7 @@
                 } else {
                 %>
 
-                <li class="nav-item active"><a class="nav-link" href="#">Home </a></li>
+                <li class="nav-item active"><a class="nav-link" href="/home"> HOME </a></li>
                 <li class="nav-item"><a class="nav-link" href="#"> Menu </a></li>
                 <li class="nav-item"><a class="nav-link" href="/login"> Log In </a></li>
                 <li class="nav-item dropdown">
