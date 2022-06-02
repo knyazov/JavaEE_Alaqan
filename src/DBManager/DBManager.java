@@ -73,8 +73,12 @@ public class DBManager {
         try {
             PreparedStatement statement = connection.prepareStatement("" +
                     "SELECT f.id, f.user_id, f.name as foodName, f.photo, f.description, f.paste_date, f.price, u.name, u.surname, u.email" +
-                    "FROM foods f " +
-                    "INNER JOIN users u on u.id = f.user_id");
+                    "                    FROM foods f " +
+                    "                    INNER JOIN users u on u.id = f.user_id" +
+                    "" +
+                    "");
+
+
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Foods food = new Foods();
@@ -91,6 +95,7 @@ public class DBManager {
                 user.setEmail(resultSet.getString("email"));
 
                 food.setUser(user);
+                foods.add(food);
             }
             statement.close();
         } catch (Exception e) {
