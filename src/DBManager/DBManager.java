@@ -82,6 +82,7 @@ public class DBManager {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Foods food = new Foods();
+                food.setId(Long.parseLong(resultSet.getString("id")));
                 food.setName(resultSet.getString("foodName"));
                 food.setPhoto(resultSet.getString("photo"));
                 food.setDescription(resultSet.getString("description"));
