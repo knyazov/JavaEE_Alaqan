@@ -23,16 +23,20 @@ public class EditFoodServlet extends HttpServlet {
             String description = request.getParameter("description");
             Long price = Long.parseLong(request.getParameter("price"));
 
-            Foods food = new Foods();
-            food.setId(id);
-            food.setName(name);
-            food.setPhoto(photo);
-            food.setDescription(description);
-            food.setPrice(price);
-            food.setUser(currentUser);
+            Foods food = DBManager.getFood(id);
+            if (food != null) {
+                food.setName(name);
+                food.setPhoto(photo);
+                food.setDescription(description);
+                food.setPrice(price);
 
-            DBManager.editFood(food);
-            response.sendRedirect("/home");
+                if (DBManager.editFood(food)) {
+                    response.sendRedirect("/editFood?id=" + id + "success");
+                }
+            } else {
+                response.sendRedirect("/editFood?id=" + id + "wrong");
+            }
+
 
         } else {
             response.sendRedirect("/login.jsp");
@@ -43,8 +47,22 @@ public class EditFoodServlet extends HttpServlet {
 
         User currentUser = (User) request.getSession().getAttribute("currentUser");
         if (currentUser != null) {
+
+            Long id = 0L;
+            try {
+                id = Long.parseLong(request.getParameter("id"));
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
             request.setAttribute("currentUser", currentUser);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+
+            Foods food = DBManager.getFood(id);
+
+            request.setAttribute("food", food);
+            request.getRequestDispatcher("editFood.jsp").forward(request, response);
 
         } else {
             response.sendRedirect("/login");
