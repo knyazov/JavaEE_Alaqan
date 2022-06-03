@@ -103,4 +103,48 @@ public class DBManager {
         }
         return foods;
     }
+
+    public static boolean editFood(Foods food) {
+        int rows = 0;
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "UPDATE foods SET name = ?, photo = ?, description = ?, price = ?, paste_date = NOW()" +
+                    "WHERE id = ?");
+            statement.setString(1, food.getName());
+            statement.setString(2, food.getPhoto());
+            statement.setString(3, food.getDescription());
+            statement.setLong(4, food.getPrice());
+            statement.setLong(5, food.getId());
+
+            rows = statement.executeUpdate();
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rows > 0;
+    }
+    public static Foods getFood(Long id){
+        Foods food = null;
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "SELECT name, photo, description, price" +
+                    "FROM foods" +
+                    "WHERE id = ?");
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                food = new Foods();
+                food.setName(resultSet.getString("name"));
+                food.setPrice(resultSet.getLong("price"));
+                food.setPhoto(resultSet.getString("photo"));
+                food.setDescription(resultSet.getString("description"));
+            }
+            statement.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return food;
+    }
 }

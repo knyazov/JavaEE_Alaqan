@@ -54,9 +54,10 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-12">
-                        <button class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary">
                             LOGIN
                         </button>
+
                     </div>
                 </div>
             </form>

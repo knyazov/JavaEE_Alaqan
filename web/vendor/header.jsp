@@ -8,3 +8,6 @@
 <%
     String siteName = "Canteen";
 %>
+<script type="text/javascript" src="js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>tinymce.init({selector:'textarea'});</script>

@@ -4,9 +4,7 @@
 <html>
 <head>
     <%@include file="vendor/header.jsp" %>
-    <script type="text/javascript" src="js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 
-    <script>tinymce.init({selector:'textarea'});</script>
 </head>
 <body>
 <%@include file="vendor/navbar.jsp" %>
