@@ -31,13 +31,11 @@ public class EditFoodServlet extends HttpServlet {
                 food.setPrice(price);
 
                 if (DBManager.editFood(food)) {
-                    response.sendRedirect("/editFood?id=" + id + "success");
+                    response.sendRedirect("/editFood?id=" + id + "&success");
                 }
             } else {
-                response.sendRedirect("/editFood?id=" + id + "wrong");
+                response.sendRedirect("/editFood?id=" + id + "&wrong");
             }
-
-
         } else {
             response.sendRedirect("/login.jsp");
         }
@@ -68,6 +66,4 @@ public class EditFoodServlet extends HttpServlet {
             response.sendRedirect("/login");
         }
     }
-
-
 }

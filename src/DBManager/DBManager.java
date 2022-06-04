@@ -129,13 +129,12 @@ public class DBManager {
 
         try {
             PreparedStatement statement = connection.prepareStatement("" +
-                    "SELECT name, photo, description, price" +
-                    "FROM foods" +
-                    "WHERE id = ?");
+                    "SELECT * FROM foods WHERE id = ? LIMIT 1");
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
+           if (resultSet.next()){
                 food = new Foods();
+                food.setId(resultSet.getLong("id"));
                 food.setName(resultSet.getString("name"));
                 food.setPrice(resultSet.getLong("price"));
                 food.setPhoto(resultSet.getString("photo"));
