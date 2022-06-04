@@ -35,7 +35,7 @@
                                 <br>
                                 <p>ON <%=f.getPaste_date()%>
                                 </p>
-                                <p><%=f.getId()%></p>
+                                <p><%=f.getPrice() + " "%>KZT</p>
                                 <a href="/editFood?id=<%=f.getId()%>" class="btn btn-primary"> EDIT
                                 </a>
                             </div>
@@ -65,6 +65,8 @@
                             <br>
                             <p>ON <%=f.getPaste_date()%>
                             </p>
+                            <p><%=f.getPrice() + " "%>KZT</p>
+
                         </div>
                     </div>
                 </div>

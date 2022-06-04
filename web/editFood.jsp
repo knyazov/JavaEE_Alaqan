@@ -11,13 +11,13 @@
 
 <div class="container">
     <div class="row mt-3">
-        <div class="col-6 mx-auto">
+        <div class="col-6 mx-auto mb-3">
 
             <%
                 Foods food = (Foods) request.getAttribute("food");
                 if (food != null) {
             %>
-            <div class="col-sm-6 offset-3">
+            <div class="col-sm-12 offset-3 mx-auto">
 
                 <%
                     String success = request.getParameter("success");
@@ -57,6 +57,10 @@
                         <div class="col-12">
                             <label>PHOTO : </label>
                         </div>
+                    </div><div class="row">
+                        <div class="col-12">
+                            <img src="<%=food.getPhoto()%>">
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -84,8 +88,12 @@
                         </div>
                     </div>
                     <button class="btn btn-success">SAVE FOOD</button>
+
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFoodModal">
+                        DELETE FOOD FROM DB
+                    </button>
                 </form>
-                <div class="modal fade" id="deleteStudentModal" tabindex="-1" role="dialog"
+                <div class="modal fade" id="deleteFoodModal" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">

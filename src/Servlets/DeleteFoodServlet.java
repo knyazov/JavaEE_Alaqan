@@ -19,6 +19,11 @@ public class DeleteFoodServlet extends HttpServlet {
         if (currentUser != null) {
             Long id = Long.parseLong(request.getParameter("id"));
 
+            if (DBManager.deleteFood(id)){
+                response.sendRedirect("/home");
+            }else {
+                response.sendRedirect("/");
+            }
 
         } else {
             response.sendRedirect("/login.jsp");
@@ -30,7 +35,7 @@ public class DeleteFoodServlet extends HttpServlet {
         User currentUser = (User) request.getSession().getAttribute("currentUser");
         if (currentUser != null) {
             request.setAttribute("currentUser", currentUser);
-            request.getRequestDispatcher("addFood.jsp").forward(request, response);
+            request.getRequestDispatcher("home.jsp").forward(request, response);
 
         } else {
             response.sendRedirect("/login");
