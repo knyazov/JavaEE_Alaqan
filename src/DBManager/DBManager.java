@@ -124,7 +124,8 @@ public class DBManager {
         }
         return rows > 0;
     }
-    public static Foods getFood(Long id){
+
+    public static Foods getFood(Long id) {
         Foods food = null;
 
         try {
@@ -132,7 +133,7 @@ public class DBManager {
                     "SELECT * FROM foods WHERE id = ? LIMIT 1");
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-           if (resultSet.next()){
+            if (resultSet.next()) {
                 food = new Foods();
                 food.setId(resultSet.getLong("id"));
                 food.setName(resultSet.getString("name"));
@@ -141,10 +142,25 @@ public class DBManager {
                 food.setDescription(resultSet.getString("description"));
             }
             statement.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return food;
+    }
+
+    public static boolean deleteFood(Long id) {
+        int rows = 0;
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "DELETE FROM foods WHERE id = ?");
+            statement.setLong(1, id);
+            rows = statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rows > 0;
     }
 }

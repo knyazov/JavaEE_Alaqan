@@ -17,20 +17,8 @@ public class DeleteFoodServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User currentUser = (User) request.getSession().getAttribute("currentUser");
         if (currentUser != null) {
-            String name = request.getParameter("name");
-            String photo = request.getParameter("photo");
-            String description = request.getParameter("description");
-            Long price = Long.parseLong(request.getParameter("price"));
+            Long id = Long.parseLong(request.getParameter("id"));
 
-            Foods food = new Foods();
-            food.setName(name);
-            food.setPhoto(photo);
-            food.setDescription(description);
-            food.setPrice(price);
-            food.setUser(currentUser);
-
-            DBManager.addFood(food);
-            response.sendRedirect("/addFood");
 
         } else {
             response.sendRedirect("/login.jsp");
