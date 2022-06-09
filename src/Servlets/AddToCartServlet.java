@@ -32,6 +32,9 @@ public class AddToCartServlet extends HttpServlet {
                 Long id = Long.parseLong(request.getParameter("id"));
                 Cart cart = new Cart();
                 cart.setId(id);
+                Foods food = DBManager.getFood(id);
+                cart.setName(food.getName());
+                cart.setPrice(food.getPrice());
                 cart.setQuantity(1);
 
 

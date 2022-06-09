@@ -1,5 +1,6 @@
 package DBManager;
 
+import Entities.Cart;
 import Entities.Foods;
 import Entities.User;
 
@@ -162,5 +163,38 @@ public class DBManager {
         }
 
         return rows > 0;
+    }
+
+    public static ArrayList<Cart> getCartProducts(ArrayList<Cart> cartArrayList) {
+        ArrayList<Cart> products = new ArrayList<>();
+        Cart food = null;
+        try {
+            if (cartArrayList.size() > 0) {
+                for (Cart item :
+                        cartArrayList) {
+                    PreparedStatement statement = connection.prepareStatement("" +
+                            "SELECT * FROM foods" +
+                            "WHERE id = ?" +
+                            "");
+                    statement.setLong(1, item.getId());
+                    ResultSet resultSet = statement.executeQuery();
+                    while (resultSet.next()) {
+                        food = new Cart();
+                        food.setId(resultSet.getLong("id"));
+                        food.setName(resultSet.getString("name"));
+                        food.setPrice(resultSet.getLong("price") * item.getQuantity());
+                        food.setPhoto(resultSet.getString("photo"));
+                        food.setDescription(resultSet.getString("description"));
+                        food.setQuantity(item.getQuantity());
+                        products.add(food);
+                    }
+                    statement.close();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return products;
     }
 }
